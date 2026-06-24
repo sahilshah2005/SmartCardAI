@@ -1,211 +1,54 @@
-# SmartCart AI
+# 🛒 SmartCart AI — Retail Supply Chain & Inventory Optimizer
 
-AI-Powered Demand Forecasting and Inventory Optimization Platform for Retail Supply Chain Analytics
+An AI-powered demand forecasting and inventory optimization platform built for retail supply chain analytics.
 
-## Overview
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://smartcartai.streamlit.app)
 
-SmartCart AI is a machine learning-based retail analytics platform designed to help businesses forecast product demand and optimize inventory management. The system analyzes historical sales data to generate demand predictions and inventory recommendations, enabling retailers to reduce stock-outs, minimize excess inventory, and improve supply chain efficiency.
+## 🚀 Features
 
-The project demonstrates the application of data analytics and machine learning techniques in solving real-world retail inventory challenges.
+- **Demand Forecasting** — Random Forest ML model predicts weekly product demand
+- **Inventory Optimization** — EOQ (Economic Order Quantity) and Reorder Point calculations
+- **Interactive Dashboard** — Real-time KPIs, revenue trends, and category breakdowns
+- **Sales Trend Analysis** — Multi-product comparison across time
 
-## Problem Statement
+## 🛠 Tech Stack
 
-Retail businesses often face challenges in maintaining optimal inventory levels. Insufficient stock can result in lost sales and dissatisfied customers, while excessive inventory increases storage costs and ties up working capital.
+- **Python** · **Scikit-Learn** · **Streamlit** · **Pandas** · **NumPy** · **Matplotlib**
 
-SmartCart AI addresses this problem by:
+## ⚙️ Run Locally
 
-* Forecasting future product demand
-* Identifying inventory risks
-* Generating stock replenishment recommendations
-* Supporting data-driven inventory planning
+```bash
+git clone https://github.com/YOUR_USERNAME/SmartCartAI.git
+cd SmartCartAI
+pip install -r requirements.txt
+streamlit run src/app.py
+```
 
-## Objectives
+## 📁 Project Structure
 
-* Analyze historical retail sales data
-* Forecast future product demand using machine learning
-* Improve inventory decision-making
-* Provide actionable business insights
-* Demonstrate practical use of predictive analytics in retail
-
-## Features
-
-### Demand Forecasting
-
-Predict future sales trends based on historical sales records.
-
-### Inventory Optimization
-
-Recommend inventory adjustments based on forecasted demand.
-
-### Retail Analytics
-
-Generate insights into product performance and sales trends.
-
-### Risk Identification
-
-Identify potential stock shortages and overstock situations.
-
-### Dashboard Visualization
-
-Present analytical results through an interactive dashboard.
-
-
-## Project Structure
-
-```text
+```
 SmartCartAI/
-│
+├── src/
+│   ├── app.py          # Streamlit dashboard (main entry point)
+│   ├── forecast.py     # Random Forest forecasting model
+│   ├── inventory.py    # EOQ & reorder point engine
+│   └── config.py       # App configuration
 ├── data/
 │   └── retail_sales.csv
-│
-├── docs/
-│   └── ARCHITECTURE.md
-│
-├── src/
-│   ├── main.py
-│   ├── app.py
-│   ├── forecast.py
-│   ├── inventory.py
-│   └── config.py
-│
 ├── tests/
 │   └── test_forecast.py
-│
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
 
-## Technology Stack
+## 🧠 ML Model
 
-### Programming Language
+The forecasting model uses **Random Forest Regressor** with features:
+- Week of year, Month, Quarter (temporal patterns)
+- Product encoding (per-SKU demand behavior)
 
-* Python
+Outputs weekly unit forecasts for any product, 2–12 weeks ahead.
 
-### Libraries
+## 📊 Inventory Logic
 
-* Pandas
-* NumPy
-* Scikit-Learn
-* Streamlit
-
-### Development Tools
-
-* Git
-* GitHub
-* VS Code
-
-## Dataset
-
-The project uses a retail sales dataset containing:
-
-* Day
-* Sales Volume
-* Product Category
-
-The dataset is stored in:
-
-```text
-data/retail_sales.csv
-```
-
-## System Workflow
-
-1. Load retail sales data
-2. Perform data preprocessing
-3. Train forecasting model
-4. Generate demand predictions
-5. Calculate inventory recommendations
-6. Display results through dashboard
-
-## How to Run the Project
-
-### Step 1: Clone Repository
-
-```bash
-git clone https://github.com/<your-username>/SmartCartAI.git
-```
-
-### Step 2: Navigate to Project Directory
-
-```bash
-cd SmartCartAI
-```
-
-### Step 3: Create Virtual Environment
-
-Windows:
-
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
-
-Linux/Mac:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 4: Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 5: Run Main Application
-
-```bash
-python main.py
-```
-
-### Step 6: Launch Dashboard
-
-```bash
-streamlit run app.py
-```
-
-### Step 7: Open Browser
-
-Visit:
-
-```text
-http://localhost:8501
-```
-
-## Expected Output
-
-* Demand Forecast Report
-* Inventory Recommendations
-* Sales Trend Analysis
-* Dashboard Visualizations
-
-## Future Enhancements
-
-* Multi-warehouse inventory optimization
-* Deep learning forecasting models
-* Real-time sales integration
-* Product recommendation engine
-* Cloud deployment
-* Advanced business intelligence dashboards
-
-
-## Applications
-
-* E-commerce platforms
-* Retail chains
-* Warehouse management
-* Supply chain planning
-* Inventory management systems
-
-
-## Author
-
-Sahil Shah
-
-Final Year Computer Engineering Student
-
-Mumbai University
-
-```
-```
+- **Reorder Point** = (Avg Demand × Lead Time) + Safety Stock  
+- **EOQ** = √(2DS/H) — classic square-root formula balancing order & holding costs
